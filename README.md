@@ -38,12 +38,7 @@ Donations are warmly welcomed no matter how small and thank you very much. 😌
 ## Install 3x-ui + SSL certificate
 
 ```bash
-sudo apt update && sudo apt upgrade -y 
-&& sudo apt install -y git curl openssl qrencode systemd 
-&& rm -rf self_signed_certificate.sh 
-&& curl -O https://raw.githubusercontent.com/AnikBeris/self-signed-certificate/main/self_signed_certificate.sh 
-&& chmod +x self_signed_certificate.sh 
-&& sudo ./self_signed_certificate.sh
+sudo apt update && sudo apt upgrade -y && sudo apt install -y git curl openssl qrencode systemd && rm -rf self_signed_certificate.sh && curl -O https://raw.githubusercontent.com/AnikBeris/self-signed-certificate/main/self_signed_certificate.sh && chmod +x self_signed_certificate.sh && sudo ./self_signed_certificate.sh
 
 ```
 
