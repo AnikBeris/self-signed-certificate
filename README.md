@@ -26,7 +26,7 @@
 **If you like this project, don't forget to leave a star.**:star2:
 
 <p align="left">
-  <a href="https://buymeacoffee.com/mhsanaei" target="_blank">
+  <a href="https://pay.cloudtips.ru/p/7249ba98" target="_blank">
     <img src="./media/buymeacoffe.png" alt="Image">
   </a>
 </p>
