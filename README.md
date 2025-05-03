@@ -33,10 +33,14 @@
 
 Donations are warmly welcomed no matter how small and thank you very much. 😌
 
-- **Bitcoin (BTC)** - `1Dbwq9EP8YpF3SrLgag2EQwGASMSGLADbh`
-- **Ethereum (ERC20)** - `0x22258ea591966e830199d27dea7c542f31ed5dc5`
-- **Binance Smart Chain (BEP20)** - `0x22258ea591966e830199d27dea7c542f31ed5dc5`
-- **Solana (SOL)** - `yYYXsiVTzsvfvsMnBxfxSZEWTGytjAViE2ojf3hbLeF`
+| | |
+|-------------:|:-------------|
+| **Bitcoin (BTC)** |`1Dbwq9EP8YpF3SrLgag2EQwGASMSGLADbh`|
+| **Ethereum (ERC20)** | `0x22258ea591966e830199d27dea7c542f31ed5dc5`|
+| **Binance Smart Chain (BEP20)** | `0x22258ea591966e830199d27dea7c542f31ed5dc5`|
+| **Solana (SOL)** | `yYYXsiVTzsvfvsMnBxfxSZEWTGytjAViE2ojf3hbLeF`|
+| **Cloud tips** | [cloudtips](https://pay.cloudtips.ru/p/7249ba98) |
+---
 
 
 
@@ -82,7 +86,7 @@ When using, just enter your `domain name`, `email`, and `API KEY`. The diagram i
 
 </details>
 
-
+---
 
 
 ## Recommended OS
