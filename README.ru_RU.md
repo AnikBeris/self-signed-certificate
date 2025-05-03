@@ -1,4 +1,4 @@
-[English](/README.md) | [Русский](/README.ru_RU.md)
+**------->** [English](/README.md) | [Русский](/README.ru_RU.md)  **<-------**
 
 <p align="center">
   <picture>
@@ -10,7 +10,7 @@
 <div align="center">
 
 [![Static Badge](https://img.shields.io/badge/GitHub-blue?style=flat&logo=github)](https://github.com/AnikBeris/bitping)
-[![Static Badge](https://img.shields.io/badge/License-purple?style=flat&logo=github)](https://github.com/AnikBeris/bitping/blob/main/LICENSE)
+[![Static Badge](https://img.shields.io/badge/License-purple?style=flat&logo=github)](https://github.com/AnikBeris/self-signed-certificate/blob/main/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/XternA/honeygain-reward?style=flat&logo=github&label=Stars&color=orange)](https://github.com/AnikBeris/bitping)
 
 </div>
@@ -20,6 +20,8 @@
 
 **Если этот проект оказался полезным для вас, вы можете оценить его, поставив звёздочку.**:star2:
 
+
+
 <p align="left">
   <a href="https://pay.cloudtips.ru/p/7249ba98" target="_blank">
     <img src="./media/buymeacoffe.png" alt="Image">
@@ -28,12 +30,16 @@
 
 Пожертвования горячо приветствуются, какими бы маленькими они ни были, и большое спасибо. 😌
 
-- **Bitcoin (BTC)** - `1Dbwq9EP8YpF3SrLgag2EQwGASMSGLADbh`
-- **Ethereum (ERC20)** - `0x22258ea591966e830199d27dea7c542f31ed5dc5`
-- **Binance Smart Chain (BEP20)** - `0x22258ea591966e830199d27dea7c542f31ed5dc5`
-- **Solana (SOL)** - `yYYXsiVTzsvfvsMnBxfxSZEWTGytjAViE2ojf3hbLeF`
+| | |
+|-------------:|:-------------|
+| **Bitcoin (BTC)** |`1Dbwq9EP8YpF3SrLgag2EQwGASMSGLADbh`|
+| **Ethereum (ERC20)** | `0x22258ea591966e830199d27dea7c542f31ed5dc5`|
+| **Binance Smart Chain (BEP20)** | `0x22258ea591966e830199d27dea7c542f31ed5dc5`|
+| **Solana (SOL)** | `yYYXsiVTzsvfvsMnBxfxSZEWTGytjAViE2ojf3hbLeF`|
+| **Cloud tips** | [cloudtips](https://pay.cloudtips.ru/p/7249ba98) |
+---
 
-
+---
 
 ## Установка 3x-ui + SSL Сертификат
 
@@ -44,7 +50,6 @@ rm -rf self_signed_certificate.sh && \
 curl -O https://raw.githubusercontent.com/AnikBeris/self-signed-certificate/main/self_signed_certificate.sh && \
 chmod +x self_signed_certificate.sh && \
 bash ./self_signed_certificate.sh
-
 
 ```
 
@@ -76,7 +81,7 @@ bash ./self_signed_certificate.sh
 
 </details>
 
-
+---
 
 
 ## Рекомендуемые ОС
