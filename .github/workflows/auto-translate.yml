@@ -1,11 +1,10 @@
-name: Auto-Translate to English
+name: Автоперевод README -> README_en_EN.md
 
 on:
-  workflow_dispatch:
-
+  workflow_dispatch:   # ручной запуск (можно запускать вручную)
   push:
     paths:
-      - "README.md"
+      - "README.md"    # и автоматический запуск при изменении README.md
 
 permissions:
   contents: write
@@ -15,51 +14,91 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Клонируем репозиторий
+        uses: actions/checkout@v4
 
-      - name: Читаем README.md
+      - name: Устанавливаем jq (парсер JSON)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Читаем README.md и передаём в output
         id: read
         run: |
+          # читаем содержимое
           content="$(cat README.md)"
-          # Экранируем кавычки
-          content="${content//\"/\\\"}"
 
-          # Передаем текст в output
-          echo "content<<EOF" >> $GITHUB_OUTPUT
+          # если файл пустой — выходим с ошибкой
+          if [ -z "$content" ]; then
+            echo "README.md пустой или не найден" >&2
+            exit 2
+          fi
+
+          # записываем многострочный output корректно
+          echo "readme<<EOF" >> $GITHUB_OUTPUT
           echo "$content" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Переводим через GitHub Copilot API
+      - name: Переводим через LibreTranslate (публичный сервис)
         id: translate
         env:
-          COPILOT_TOKEN: ${{ secrets.COPILOT_TOKEN }}
-          TEXT: ${{ steps.read.outputs.content }}
+          # можно переопределить URL в secrets, если у тебя свой экземпляр libretranslate
+          TRANSLATE_URL: ${{ secrets.TRANSLATE_API_URL || 'https://libretranslate.com/translate' }}
+          TEXT: ${{ steps.read.outputs.readme }}
         run: |
-          response=$(curl -s -X POST "https://api.githubcopilot.com/copilot/v1/chat/completions" \
-            -H "Authorization: Bearer ${COPILOT_TOKEN}" \
+          # параметры: source=auto, target=en, format=markdown
+          # Если сервис вернёт ошибку, шаг завершится с ненулевым кодом.
+          response=$(curl -sS -X POST "${TRANSLATE_URL}" \
             -H "Content-Type: application/json" \
-            -d "{
-              \"model\": \"gpt-4o-mini\",
-              \"messages\": [
-                {\"role\": \"system\", \"content\": \"Ты — профессиональный переводчик Markdown.\"},
-                {\"role\": \"user\", \"content\": \"Переведи на английский, сохранив Markdown:\n${TEXT}\"}
-              ]
-            }")
+            -d @- <<EOF
+{
+  "q": "${TEXT//\"/\\\"}",
+  "source": "auto",
+  "target": "en",
+  "format": "markdown"
+}
+EOF
+)
 
-          translation=$(echo "$response" | jq -r '.choices[0].message.content')
+          # проверяем ответ
+          if [ -z "$response" ]; then
+            echo "Пустой ответ от сервиса перевода" >&2
+            exit 3
+          fi
 
+          # парсим translatedText
+          translated=$(echo "$response" | jq -r '.translatedText // empty')
+
+          if [ -z "$translated" ]; then
+            echo "Не удалось получить translatedText из ответа: $response" >&2
+            exit 4
+          fi
+
+          # передаём перевод как output
           echo "translation<<EOF" >> $GITHUB_OUTPUT
-          echo "$translation" >> $GITHUB_OUTPUT
+          echo "$translated" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Сохраняем README_en_EN.md
+      - name: Записываем README_en_EN.md
         run: |
           echo "${{ steps.translate.outputs.translation }}" > README_en_EN.md
 
-      - name: Коммит
+      - name: Покажем первые 40 строк перевода (для отладки)
+        if: always()
+        run: |
+          echo "---- Начало файла README_en_EN.md ----"
+          head -n 40 README_en_EN.md || true
+          echo "---- Конец предварительного просмотра ----"
+
+      - name: Коммит и пуш
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions"
           git add README_en_EN.md
-          git commit -m "Автоперевод README" || echo "Нет изменений"
-          git push
+          # если изменений нет — git commit вернёт ненулевой код, поэтому ловим ошибку
+          if git diff --cached --quiet; then
+            echo "Нет изменений для коммита"
+          else
+            git commit -m "Автоперевод README -> README_en_EN.md"
+            git push
+          fi
