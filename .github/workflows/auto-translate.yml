@@ -19,15 +19,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        language: ["spanish", "russian", "chinese"]  # Добавьте нужные языки
+        language: ["spanish", "english", "chinese"]  # Добавьте нужные языки
         include:
           - language: "spanish"
             file: "README.es.md"
-          - language: "russian"
-            file: "README.ru.md"
+#          - language: "russian"
+#            file: "README.ru.md"
           - language: "chinese"
             file: "README.zh.md"
-
+          - language: "english"
+            file: "README.en.md"
     steps:
       - uses: actions/checkout@v4
 
