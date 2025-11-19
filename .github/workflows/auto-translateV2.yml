@@ -1,13 +1,12 @@
 name: Translate Lessons
 
 on:
-  workflow_dispatch: # ручной запуск
-
+  workflow_dispatch:          # ручной запуск
   push:
     branches:
       - main
     paths:
-      - "README.md"  # Или пути к вашим урокам, напр. "lessons/*.md"
+      - "README.md"
 
 permissions:
   contents: write
@@ -19,62 +18,69 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        language: ["english", "spanish", "russian", "chinese"]  # Добавлен english
         include:
           - language: "english"
             file: "README.en.md"
           - language: "spanish"
             file: "README.es.md"
-          - language: "russian"
-            file: "README.ru.md"
-          - language: "chinese"
+          - language: "chinese (simplified)"
             file: "README.zh.md"
+          # Добавляй новые языки сюда ↑
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Translate File
+      - name: Translate → ${{ matrix.file }}
         uses: FidelusAleksander/ai-translate-action@v1
         id: translate
         with:
-          text-file: "README.md"  # Исходный файл для перевода
+          text-file: README.md
           target-language: ${{ matrix.language }}
-          custom-instructions: "Технические термины, такие как «самозаверяющий сертификат», используйте на английском языке. Не переводите блоки кода или URL-адреса."
+          custom-instructions: |
+            Это технический урок по самоподписанным сертификатам.
+            Все технические термины (self-signed certificate, OpenSSL, private key, CSR, CA, SAN, PKCS12 и т.п.) оставляй на английском.
+            Не переводи блоки кода, команды терминала, имена файлов, расширения и URL.
 
-      - name: Save Translation
+      # Сохраняем прямо в корень репозитория
+      - name: Save translation to root
         run: |
-          mkdir -p docs
-          echo "$TRANSLATED_TEXT" | tee docs/${{ matrix.file }}
-        env:
-          TRANSLATED_TEXT: ${{ steps.translate.outputs.translated-text }}
+          echo "${{ steps.translate.outputs.translated-text }}" > ${{ matrix.file }}
 
-      - name: Upload Translation Artifact
+      # Загружаем как артефакт (по одному файлу на матрицу)
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.file }}
-          path: docs/${{ matrix.file }}
+          path: ${{ matrix.file }}
 
   create-pr:
     needs: translate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Скачиваем все переведённые файлы прямо в корень
       - uses: actions/download-artifact@v4
         with:
-          path: docs
+          path: .
           merge-multiple: true
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "docs: update translations of lessons"
-          title: "docs: update translations of lessons"
+          commit-message: "docs(i18n): update translations (en, es, zh)"
+          title: "docs: обновлены переводы README"
           body: |
-            This PR updates translations of the lessons using AI Translate Action.
+            Автоматические переводы русского оригинала на английский, испанский и китайский.
 
-            Changes were automatically generated using the [ai-translate-action](https://github.com/FidelusAleksander/ai-translate-action).
-          branch: docs/update-translations
-          add-paths: "docs/README*"
+            Сгенерировано через https://github.com/FidelusAleksander/ai-translate-action
+          branch: i18n/translations
           delete-branch: true
+          add-paths: |
+            README.en.md
+            README.es.md
+            README.zh.md
           labels: |
             documentation
-            translation
+            i18n
+            automated
