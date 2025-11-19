@@ -1,0 +1,100 @@
+name: Translate README
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'README.md'          # запускаем только при изменении русского оригинала
+
+permissions:
+  contents: write
+  pull-requests: write
+  models: read
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - language: "english"
+            code: "en"
+            file: "README.en.md"          # английский перевод
+
+          - language: "spanish"
+            code: "es"
+            file: "README.es.md"
+
+          - language: "chinese (simplified)"
+            code: "zh"
+            file: "README.zh.md"
+
+          # добавляйте сюда любые другие языки по такому же шаблону
+          # - language: "german"
+          #   code: "de"
+          #   file: "README.de.md"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Пропускаем шаг перевода для английского и других языков, если хотите добавить ещё «оригиналы»
+      - name: AI Translate (skip if source language)  # русский — исходный, его не переводим
+        if: ${{ matrix.code != 'ru' }}                    
+        uses: FidelusAleksander/ai-translate-action@v1
+        id: translate
+        with:
+          text-file: "README.md"                           # ваш русский оригинал
+          target-language: ${{ matrix.language }}
+          custom-instructions: |
+            Это технический урок по созданию самоподписанных SSL-сертификатов.
+            НЕ переводи:
+            - команды терминала и код
+            - имена файлов и расширений (.crt, .key, .pem, .csr, .pfx)
+            - технические термины: self-signed certificate, OpenSSL, private key, public key, CA, CSR, PKCS12, subjectAltName, SAN
+            - URL и доменные имена
+            Переводи только пояснительный текст. Сохраняй форматирование Markdown.
+
+      - name: Save translated file
+        run: |
+          mkdir -p translated
+          if [ "${{ matrix.code }}" == "en" ] || [ "${{ matrix.code }}" != "ru" ]; then
+            echo "${TRANSLATED_TEXT}" > translated/${{ matrix.file }}
+          else
+            # если вдруг добавите русский в матрицу — просто копируем оригинал
+            cp README.md translated/README.md
+          fi
+        env:
+          TRANSLATED_TEXT: ${{ steps.translate.outputs.translated-text || '' }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: translations-${{ matrix.code }}
+          path: translated/${{ matrix.file }}
+
+  create-pr:
+    needs: translate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: translated
+          merge-multiple: true
+
+      - name: Move files to root (optional or leave in /translated folder)
+        run: |
+          mv translated/*/README* . || true
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "docs(i18n): update translations (en, es, zh)"
+          title: "docs: update translations from Russian original"
+          body: |
+            Автоматический перевод README.md с русского на другие языки.
+            Проверьте, пожалуйста, технические термины и код.
+          branch: i18n/update-translations
+          delete-branch: true
+          labels: documentation,translation,automated
