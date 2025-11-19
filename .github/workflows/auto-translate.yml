@@ -1,14 +1,14 @@
-name: Перевод README на английский
+name: Auto-Translate to English
 
 on:
   workflow_dispatch: # ручной запуск
-  
+
   push:
     paths:
       - "README.md"   # Запускаем workflow только при изменении README.md
 
 permissions:
-  contents: write      # Разрешаем action создавать коммиты
+  contents: write      # Даём разрешение на запись в репозиторий
 
 jobs:
   translate:
@@ -17,41 +17,48 @@ jobs:
     steps:
       - uses: actions/checkout@v4   # Клонируем репозиторий
 
-      - name: Чтение README.md
+      - name: Читаем README.md
         id: read
         run: |
-          # Читаем содержимое README.md
           content=$(cat README.md)
-
-          # Экранируем кавычки, чтобы текст корректно прошёл в JSON
+          # Экранируем кавычки
           content="${content//\"/\\\"}"
-
-          # Передаём результат в следующий шаг
           echo "content=$content" >> $GITHUB_OUTPUT
 
-      - name: Перевод через GitHub Copilot Chat API
+      - name: Переводим через GitHub Copilot API
         id: translate
-        uses: github/copilot-actions/cli@v1
-        with:
-          # Запрос Copilot: перевести Markdown на английский, сохранив форматирование
-          query: "Переведи следующий Markdown-текст на английский, сохранив форматирование:\n${{ steps.read.outputs.content }}"
-
-      - name: Сохраняем перевод
+        env:
+          COPILOT_TOKEN: ${{ secrets.COPILOT_TOKEN }}
+          TEXT: ${{ steps.read.outputs.content }}
         run: |
-          # Создаём файл README_en_EN.md и записываем туда ответ Copilot
-          echo "${{ steps.translate.outputs.response }}" > README_en_EN.md
+          # Отправляем запрос в GitHub Copilot API через curl
+          response=$(curl -s -X POST "https://api.githubcopilot.com/copilot/v1/chat/completions" \
+            -H "Authorization: Bearer ${COPILOT_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"model\": \"gpt-4o-mini\",
+              \"messages\": [
+                {\"role\": \"system\", \"content\": \"Ты — профессиональный переводчик Markdown.\"},
+                {\"role\": \"user\", \"content\": \"Переведи на английский, сохранив форматирование Markdown:\n${TEXT}\"}
+              ]
+            }")
 
-      - name: Коммит перевода
+          # Извлекаем текст перевода из JSON ответа
+          translation=$(echo "$response" | jq -r '.choices[0].message.content')
+
+          # Передаём перевод в следующий шаг
+          echo "translation<<EOF" >> $GITHUB_OUTPUT
+          echo "$translation" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Сохраняем README_en_EN.md
         run: |
-          # Настройка данных автора коммита
+          echo "${{ steps.translate.outputs.translation }}" > README_en_EN.md
+
+      - name: Коммит
+        run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions"
-
-          # Добавляем новый файл
           git add README_en_EN.md
-
-          # Коммитим изменения (если они есть)
-          git commit -m "Автоперевод README на английский" || echo "Нет изменений для коммита"
-
-          # Пушим в репозиторий
+          git commit -m "Автоперевод README" || echo "Нет изменений"
           git push
