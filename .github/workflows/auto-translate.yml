@@ -1,41 +1,57 @@
-name: Auto-Translate README to English
+name: Перевод README на английский
 
 on:
   workflow_dispatch: # ручной запуск
   
   push:
     paths:
-      - "README.md"
+      - "README.md"   # Запускаем workflow только при изменении README.md
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write      # Разрешаем action создавать коммиты
 
 jobs:
   translate:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4   # Клонируем репозиторий
 
-      - name: Translate README.md to English using Copilot
-        uses: github/copilot-actions/translate@v1
+      - name: Чтение README.md
+        id: read
+        run: |
+          # Читаем содержимое README.md
+          content=$(cat README.md)
+
+          # Экранируем кавычки, чтобы текст корректно прошёл в JSON
+          content="${content//\"/\\\"}"
+
+          # Передаём результат в следующий шаг
+          echo "content=$content" >> $GITHUB_OUTPUT
+
+      - name: Перевод через GitHub Copilot Chat API
+        id: translate
+        uses: github/copilot-actions/cli@v1
         with:
-          source_path: README.md
-          target_languages: "en"
-          output_dir: .
+          # Запрос Copilot: перевести Markdown на английский, сохранив форматирование
+          query: "Переведи следующий Markdown-текст на английский, сохранив форматирование:\n${{ steps.read.outputs.content }}"
 
-      - name: Rename generated file
+      - name: Сохраняем перевод
         run: |
-          # Copilot Action обычно выводит файл README.en.md 
-          if [ -f "README.en.md" ]; then
-            mv README.en.md README_en_EN.md
-          fi
+          # Создаём файл README_en_EN.md и записываем туда ответ Copilot
+          echo "${{ steps.translate.outputs.response }}" > README_en_EN.md
 
-      - name: Commit changes
+      - name: Коммит перевода
         run: |
+          # Настройка данных автора коммита
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "GitHub Actions"
+
+          # Добавляем новый файл
           git add README_en_EN.md
-          git commit -m "Auto-translation of README to English" || echo "No changes"
+
+          # Коммитим изменения (если они есть)
+          git commit -m "Автоперевод README на английский" || echo "Нет изменений для коммита"
+
+          # Пушим в репозиторий
           git push

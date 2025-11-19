@@ -21,7 +21,8 @@ on:
       - ".github/README_PARTS/*"
       - ".github/README_PARTS/5.MAIN_Article_*.md"
 
-
+permissions:
+  contents: write      # Разрешаем action создавать коммиты
 
 
 jobs:
