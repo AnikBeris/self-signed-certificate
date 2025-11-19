@@ -1,95 +1,146 @@
-[English](/README.md) | [Русский](/README.ru_RU.md)
+<p align="center">
+  <strong>-------></strong> 
+  <a href="/README_en_EN.md">English</a> | 
+  <a href="/README.md">Русский</a> 
+  <strong><-------</strong>
+</p>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./media/3x-ui-dark.png">
-    <img alt="3x-ui" src="./media/3x-ui-light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png">
+    <img alt="Project Logo" src="./media/logo-light.png" width="512" height="auto">
   </picture>
 </p>
 
+---
+
 <div align="center">
 
-[![Static Badge](https://img.shields.io/badge/GitHub-blue?style=flat&logo=github)](https://github.com/AnikBeris/bitping)
-[![Static Badge](https://img.shields.io/badge/License-purple?style=flat&logo=github)](https://github.com/AnikBeris/bitping/blob/main/LICENSE)
-[![GitHub Repo stars](https://img.shields.io/github/stars/XternA/honeygain-reward?style=flat&logo=github&label=Stars&color=orange)](https://github.com/AnikBeris/bitping)
+[![GitHub](https://img.shields.io/badge/GitHub-blue?style=flat&logo=github)](https://github.com/AnikBeris)
+[![License](https://img.shields.io/badge/License-purple?style=flat&logo=github)](/LICENSE.md)
+[![GitHub Stars](https://img.shields.io/github/stars/AnikBeris?style=flat&logo=github&label=Звёзды&color=orange)](https://github.com/AnikBeris)
 
 </div>
 
-
-# 3x-ui + SSL certificate
-
-
-
-> **Disclaimer:** This project is only for personal learning and communication, please do not use it for illegal purposes, please do not use it in a production environment
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
 
 
-**If you like this project, don't forget to leave a star.**:star2:
+<h1 align="center"> 
+статья об установке и настройке 3x-ui + SSL-сертификат
+</h1>
 
-<p align="left">
+<h2 align="center">
+> 💡 Материал ориентирован для подготовленых пользователей.
+</h2>
+
+
+* * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * 
+
+
+
+<h2 align="center">
+⚠️ Отказ от ответственности ⚠️
+</h2>
+
+<p align="center">
+  Автор не несёт ответственности за любые возможные последствия использования данного проекта.<br>
+  Используйте на свой страх и риск.
+</p>
+
+<details align="center"> 
+    <summary>⚠️полный текст⚠️</summary>
+    
+Используйте этот образ на свой страх и риск.
+
+1. Используя его, вы автоматически соглашаетесь с условиями лицензионного соглашения, связанными с ним.
+
+2. Автор не предоставляет никаких гарантий, явных или подразумеваемых, относительно точности, полноты или пригодности этого образа для каких-либо конкретных целей. 
+3. Автор не несёт ответственности за любые убытки, включая, помимо прочего, прямые, косвенные, сопутствующие, косвенные или специальные убытки, возникшие из-за использования или невозможности использования этого образа или сопровождающей его документации, даже если о возможности таких убытков было заранее сообщено.
+
+4. Используя этот образ, вы подтверждаете и принимаете на себя все риски, связанные с его применением. Кроме того, вы соглашаетесь, что автор не может быть привлечён к ответственности за какие-либо проблемы или последствия, возникшие в результате его использования.
+
+</details> 
+
+---
+
+<h3 align="center"> 
+💖 Поддержите проект 
+</h3>
+
+<p align="center"> 
+Если этот проект оказался полезным для Вас, вы можете оценить его, поставив звёздочку.:star2: 
+</p>
+
+<p align="center">
   <a href="https://pay.cloudtips.ru/p/7249ba98" target="_blank">
-    <img src="./media/buymeacoffe.png" alt="Image">
+    <img src="./media/buymeacoffe.png" alt="Buy Me a Coffee">
+  </a>
+  <a href="https://pay.cloudtips.ru/p/7249ba98" target="_blank">
+    <img src="./media/buymeacoffe.png" alt="Buy Me a Coffee">
   </a>
 </p>
 
-Donations are warmly welcomed no matter how small and thank you very much. 😌
 
-| | |
+
+<h4 align="center"> 
+Пожертвования горячо приветствуются, какими бы маленькими они ни были, и большое спасибо. 😌 
+</h1>
+
+<div align="center">
+
+|  |  |
 |-------------:|:-------------|
+| **Tether USDT (BEP20)** |`0x22258ea591966e830199d27dea7c542f31ed5dc5`|
 | **Bitcoin (BTC)** |`1Dbwq9EP8YpF3SrLgag2EQwGASMSGLADbh`|
 | **Ethereum (ERC20)** | `0x22258ea591966e830199d27dea7c542f31ed5dc5`|
 | **Binance Smart Chain (BEP20)** | `0x22258ea591966e830199d27dea7c542f31ed5dc5`|
 | **Solana (SOL)** | `yYYXsiVTzsvfvsMnBxfxSZEWTGytjAViE2ojf3hbLeF`|
 | **Cloud tips** | [cloudtips](https://pay.cloudtips.ru/p/7249ba98) |
----
 
-
-
-## Install 3x-ui + SSL certificate
-
-```bash
-sudo apt update && sudo apt upgrade -y && \
-sudo apt install -y git curl openssl qrencode systemd && \
-rm -rf self_signed_certificate.sh && \
-curl -O https://raw.githubusercontent.com/AnikBeris/self-signed-certificate/main/self_signed_certificate.sh && \
-chmod +x self_signed_certificate.sh && \
-bash ./self_signed_certificate.sh
-
-
-```
-
-
-## SSL Certificate
-
-<details>
-    <summary>Click for SSL Certificate details</summary>
-
-### Cloudflare
-
-The management script includes a built-in SSL certificate application for Cloudflare. To use this script to apply for a certificate, you need the following:
-
-- Cloudflare registered email
-- Cloudflare Global API Key
-- The domain name must be resolved to the current server through Cloudflare
-
-**How to get the Cloudflare Global API Key:**
-
-1. Run the `x-ui` command in the terminal, then choose `Cloudflare SSL Certificate`.
-2. Visit the link: [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens).
-3. Click on "View Global API Key" (see the screenshot below):
-   ![](media/APIKey1.PNG)
-4. You may need to re-authenticate your account. After that, the API Key will be shown (see the screenshot below):
-   ![](media/APIKey2.png)
-
-When using, just enter your `domain name`, `email`, and `API KEY`. The diagram is as follows:
-   ![](media/DetailEnter.png)
-
-
-</details>
+</div>
 
 ---
 
+<p align="center">
+  <sub> Спасибо за Ваше внимание к проекту и за поддержку 💙 </sub>
+</p>
 
-## Recommended OS
+---
+
+* * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * 
+
+
+
+## 📚 Содержание
+
+- [Введение](#-введение)
+
+
+
+
+## 🔗 Полезные ссылки
+
+
+* * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * 
+
+
+
+<h2 align="center">
+  <a href="#-содержание"> ⬆️ Наверх </a> 
+</h2>
+
+
+
+
+## 📊 Рекомендуемая ОС
+
+<details> 
+    <summary>⚙️ Развернуть описание</summary>
 
 - Ubuntu 20.04+
 - Debian 11+
@@ -107,29 +158,40 @@ When using, just enter your `domain name`, `email`, and `API KEY`. The diagram i
 - Amazon Linux 2023
 - Windows x64
 
-## Supported Architectures and Devices
+</details> 
 
-<details>
-  <summary>Click for Supported Architectures and devices details</summary>
 
-Our platform offers compatibility with a diverse range of architectures and devices, ensuring flexibility across various computing environments. The following are key architectures that we support:
 
-- **amd64**: This prevalent architecture is the standard for personal computers and servers, accommodating most modern operating systems seamlessly.
+## 📊 Поддерживаемые архитектуры и устройства
 
-- **x86 / i386**: Widely adopted in desktop and laptop computers, this architecture enjoys broad support from numerous operating systems and applications, including but not limited to Windows, macOS, and Linux systems.
+<details> 
+    <summary>⚙️ Развернуть описание</summary>
 
-- **armv8 / arm64 / aarch64**: Tailored for contemporary mobile and embedded devices, such as smartphones and tablets, this architecture is exemplified by devices like Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi Zero 2/Zero 2 W, Orange Pi 3 LTS, and more.
+Наша платформа предлагает совместимость с широким спектром архитектур и устройств, обеспечивая гибкость в различных вычислительных средах. Ниже перечислены основные поддерживаемые нами архитектуры:
 
-- **armv7 / arm / arm32**: Serving as the architecture for older mobile and embedded devices, it remains widely utilized in devices like Orange Pi Zero LTS, Orange Pi PC Plus, Raspberry Pi 2, among others.
+- **amd64:** Эта распространённая архитектура является стандартом для персональных компьютеров и серверов, обеспечивая беспрепятственную работу большинства современных операционных систем.
 
-- **armv6 / arm / arm32**: Geared towards very old embedded devices, this architecture, while less prevalent, is still in use. Devices such as Raspberry Pi 1, Raspberry Pi Zero/Zero W, rely on this architecture.
+- **x86 / i386:** Широко используется в настольных компьютерах и ноутбуках. Архитектура имеет широкую поддержку со стороны многочисленных операционных систем и приложений, включая, помимо прочих, `Windows, macOS и Linux`.
 
-- **armv5 / arm / arm32**: An older architecture primarily associated with early embedded systems, it is less common today but may still be found in legacy devices like early Raspberry Pi versions and some older smartphones.
+- **armv8 / arm64 / aarch64:** Предназначена для современных мобильных и встраиваемых устройств, таких как смартфоны и планшеты. Примеры устройств: `Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi Zero 2/Zero 2 W`, `Orange Pi 3 LTS` и другие.
 
-- **s390x**: This architecture is commonly used in IBM mainframe computers and offers high performance and reliability for enterprise workloads.
-</details>
+- **armv7 / arm / arm32:** Служит архитектурой для более старых мобильных и встраиваемых устройств. Всё ещё широко используется в таких устройствах, как `Orange Pi Zero LTS, Orange Pi PC Plus, Raspberry Pi 2` и других.
 
-## Languages
+- **armv6 / arm / arm32:** Ориентирована на очень старые встраиваемые устройства. Хотя она менее распространена, всё ещё применяется, например, в `Raspberry Pi 1, Raspberry Pi Zero/Zero W`.
+
+- **armv5 / arm / arm32:** Более старая архитектура, связанная главным образом с ранними встраиваемыми системами. Сегодня встречается редко, но может использоваться в устаревших устройствах, таких как ранние версии `Raspberry Pi` и некоторые старые смартфоны.
+
+- **s390x:** Эта архитектура обычно используется в мэйнфреймах `IBM` и обеспечивает высокую производительность и надёжность для корпоративных рабочих нагрузок.
+
+</details> 
+
+
+
+
+## 📊 Поддерживаемые языки
+
+<details> 
+    <summary>⚙️ Развернуть описание</summary>
 
 - English
 - Persian
@@ -144,30 +206,348 @@ Our platform offers compatibility with a diverse range of architectures and devi
 - Turkish
 - Português (Brazil)
 
-
-## Features
-
-- System Status Monitoring
-- Search within all inbounds and clients
-- Dark/Light theme
-- Supports multi-user and multi-protocol
-- Supports protocols, including VMESS, VLESS, Trojan, Shadowsocks, Dokodemo-door, Socks, HTTP, wireguard
-- Supports XTLS native Protocols, including RPRX-Direct, Vision, REALITY
-- Traffic statistics, traffic limit, expiration time limit
-- Customizable Xray configuration templates
-- Supports HTTPS access panel (self-provided domain name + SSL certificate)
-- Supports One-Click SSL certificate application and automatic renewal
-- For more advanced configuration items, please refer to the panel
-- Fixes API routes (user setting will be created with API)
-- Supports changing configs by different items provided in the panel.
-- Supports export/import database from the panel
+</details> 
 
 
 
 
-## Disclaimer ⚠️
-Use this image at your own risk and responsibility. By using this image, you agree to be automatically bound by the License Agreement associated with it.
+## 📊 Функции || Особенности
 
-The author does not provide any assurances, whether explicit or implicit, regarding the accuracy, completeness, or appropriateness of this image for specific purposes. The author shall not be held accountable for any damages, including but not limited to direct, indirect, incidental, consequential, or special damages, arising from the use or inability to use this image or its accompanying documentation, even if the possibility of such damages has been communicated.
+<details> 
+    <summary>⚙️ Развернуть описание</summary>
 
-By choosing to use this image, you acknowledge and assume all risks associated with its use. Additionally, you agree that the author cannot be held liable for any issues or consequences that may arise as a result of its usage.
+- Мониторинг состояния системы
+- Поиск по всем входящим подключениям и клиентам
+- Тема: `тёмная /светлая`
+- Поддержка нескольких пользователей и мультипротоколов
+- Поддержка протоколов: `VMESS, VLESS, Trojan, Shadowsocks, Dokodemo-door, Socks, HTTP, WireGuard`
+- Поддержка нативных XTLS-протоколов: `RPRX-Direct, Vision, REALITY`
+- Статистика трафика, лимит трафика, ограничение по времени истечения
+- Настраиваемые шаблоны конфигурации `Xray`
+- Поддержка панели доступа по `HTTPS (собственный домен + SSL-сертификат)`
+- Поддержка однокликового запроса `SSL-сертификата` и его автоматического продления
+- Для более продвинутых параметров конфигурации см. панель
+- Исправленные `API-маршруты` (настройки пользователя создаются через `API`)
+- Поддержка изменения конфигураций по различным параметрам, доступным в панели
+- Поддержка экспорта/импорта базы данных через панель
+
+</details> 
+
+
+
+
+<h1 align="center">
+⚠️ Отказ от ответственности ⚠️
+</h2>
+
+<details align="center"> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+Используйте этот образ на свой страх и риск. Используя его, вы автоматически соглашаетесь с условиями лицензионного соглашения, связанными с ним.
+
+Автор не предоставляет никаких гарантий, явных или подразумеваемых, относительно точности, полноты или пригодности этого образа для каких-либо конкретных целей. Автор не несёт ответственности за любые убытки, включая, помимо прочего, прямые, косвенные, сопутствующие, косвенные или специальные убытки, возникшие из-за использования или невозможности использования этого образа или сопровождающей его документации, даже если о возможности таких убытков было заранее сообщено.
+
+Используя этот образ, вы подтверждаете и принимаете на себя все риски, связанные с его применением. Кроме того, вы соглашаетесь, что автор не может быть привлечён к ответственности за какие-либо проблемы или последствия, возникшие в результате его использования.
+
+</details> 
+
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
+
+
+<h2 align="center">
+  <a href="#-содержание">⬆️ Наверх</a> 
+</h2>
+
+
+## 📊 1. SSL-сертификат Cloudflare
+
+<div align="center">
+  <img src="./media/Tutorial/Article_1/cloudflare.jpg" alt=" Cloud flare " width="70%">
+</div>
+
+Скрипт управления включает встроенную функцию запроса ` SSL-сертификата ` через ` Cloudflare `. Для получения сертификата с помощью этого скрипта вам необходимо:
+
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+- Электронная почта, зарегистрированная в `Cloudflare`
+- Global API Key Cloudflare
+- Доменное имя должно быть направлено (прописано в DNS) на текущий сервер через `Cloudflare`
+
+
+
+## Как получить Global API Key Cloudflare:
+
+1. В терминале выполните команду `x-ui`, затем выберите `Cloudflare SSL Certificate`.
+
+2. Перейдите по ссылке: [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens)
+
+3. Нажмите `View Global API Key` (см. скриншот ниже):
+
+<div align="center">
+  <img src="./media/Article_1/APIKey1.png" alt=" API Key 1 " width="70%">
+</div>
+
+4. Возможно, потребуется повторная аутентификация. После этого ключ будет показан (см. скриншот ниже):
+
+<div align="center">
+  <img src="./media/Article_1/APIKey2.png" alt=" API Key 2 " width="70%">
+</div>
+
+
+При использовании просто введите свой домен, `email` и `API KEY`. Пример показан ниже:
+
+<div align="center">
+  <img src="./media/Article_1/DetailEnter.png" alt=" Detail Enter " width="70%">
+</div>
+
+</details> 
+
+
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
+
+
+<h2 align="center">
+  <a href="#-содержание">⬆️ Наверх</a> 
+</h2>
+
+# 1. Быстрая установка 3X UI на Debian/Ubuntu
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+
+```sh
+sudo apt update && sudo apt upgrade -y && \
+sudo apt install -y git curl openssl qrencode systemd && \
+rm -rf self_signed_certificate.sh && \
+curl -O https://raw.githubusercontent.com/AnikBeris/self-signed-certificate/main/self_signed_certificate.sh && \
+chmod +x self_signed_certificate.sh && \
+bash ./self_signed_certificate.sh
+
+```
+
+</details> 
+
+# 2. Ручная установка 3X UI на Debian/Ubuntu
+
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+# 📊 Установка необходимых пакетов
+
+1. Обновление системы
+Прежде чем начинать установку, убедитесь, что ваша система обновлена. Выполните следующие команды:
+
+```sh
+sudo apt update && sudo apt upgrade -y &&
+```
+
+2. Установка необходимых пакетов
+
+Убедитесь, что на вашем сервере установлены необходимые пакеты:
+
+```sh
+apt-get install wget curl openssl qrencode systemd -y
+```
+
+
+
+## Установка панели 3X-UI
+
+Для установки панели на сервер запустите выполнение скрипта командой:
+
+```sh
+bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+```
+
+Во время установки скрипт задаст вопрос:
+
+```sh
+Would you like to customize the Panel Port settings? (If not, a random port will be applied) [y/n]:
+```
+
+Отвечаем `y` если хотите установить порт сами, или `n` тогда скрипт установит порт самостоятельно
+Не устанавливайте стандартные порты `22, 80, 8080`. Рекомендуем выбрать любой другой, например `8181`
+
+
+```sh
+Username: 3favnjd8
+
+Password: Msdf823Ll
+
+Port: 40608
+
+WebBasePath: vpkPI6ex9ajesDX
+
+Access URL: http://192.168.0.149:40608/vpkPI6ex9ajesDX
+```
+
+После выполнения этих шагов установка панели будет завершена и можно подключиться через браузер к панели по пути
+
+```sh
+http://IP_адрес_вашего_сервера:порт/WebBasePath(пример: http://192.168.0.10:40608/vpkPI6ex9ajesDX)
+```
+
+После ввода адреса в браузере Вы попадете на окно входа в панель, куда необходимо ввести логин и пароль пользователя, которые ранее сообщил скрипт.
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/Login.png" alt="Login" width="70%">
+</div>
+
+
+
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
+
+
+# Общии настройки
+
+## обновление GeoSite GeoIP
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+Отрываем понель выбора версий и обновлений
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/UISetting.png" alt="UISetting" width="70%">
+</div>
+
+Обновляем дата файлы `GeoSite` и `GeoIP`
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/UpdateGeo_Site_IP.png" alt="Update GeoSite GeoIP" width="70%">
+</div>
+
+</details> 
+
+
+
+
+
+## Включаем подписки
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+переходим в `настройки` и включаем подписка
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/Setting.png" alt="Setting" width="70%">
+</div>
+
+Когда закончили нажимаем `сохранить` и `перезапуск панели`
+
+# Настройки X-Ray
+
+## Базовые соединения
+
+переходим `настройки X-Ray` -> выбираем `Основные` -> открываем подпуснкт `Базовые соединения`
+
+Выставляем всё, как на картинке
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/Setting_Xray_DNS.png" alt="Setting Xray DNS" width="70%">
+</div>
+
+Когда закончили нажимаем `сохранить` и `перезапуск Xray`
+
+</details> 
+
+
+
+
+
+## DNS
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+
+переходим `настройки X-Ray` -> выбираем `DNS` -> открываем подпуснкт `DNS`
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/Setting_Xray_DNS.png" alt="Setting Xray DNS" width="70%">
+</div>
+
+Нажимаем `Создать DNS` и по очереди записываем `DNS адреса`
+
+```bash
+tcp://8.8.8.8
+```
+
+```bash
+tcp://1.1.1.1
+```
+
+```bash
+tcp://9.9.9.9
+```
+
+<div align="center">
+  <img src="./media/Tutorial/Article_3/DNS.png" alt="DNS" width="70%">
+</div>
+
+Когда закончили нажимаем `сохранить` и `перезапуск Xray`
+
+</details> 
+
+
+
+
+
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
+
+
+## Теперь можно переходить к настройке первого подключения.
+
+Переходим в боковом меню `"Подключения"` -> Нажимаем кнопку `"Добавить подключение"`
+
+<div align="center">
+  <img src="./media/Tutorial/Article_4/UI.png" alt="UI" width="70%">
+</div>
+
+
+
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
+
+
+
+<h1 align="center"> 📜 Лицензия </h1>
+<p align="center">
+  <strong> Этот проект распространяется по </strong> 
+  <a href="/LICENSE">Apache License</a> 
+</p>
+
+---
+
+<h2 align="center"> 
+Документация ознакомьтесь с ней 
+</h2>
+
+<p align="center">
+  <strong>-------></strong> 
+  <a href="/README_en_EN.md"> English </a> | 
+  <a href="/README.md"> Русский </a> 
+  <strong><-------</strong>
+</p>
+
+
+
