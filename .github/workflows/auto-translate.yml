@@ -1,0 +1,39 @@
+name: Auto Translate README to English
+
+on:
+  push:
+    paths:
+      - "README.md"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Translate README.md to English using Copilot
+        uses: github/copilot-actions/translate@v1
+        with:
+          source_path: README.md
+          target_languages: "en"
+          output_dir: .
+
+      - name: Rename generated file
+        run: |
+          # Copilot Action обычно выводит файл README.en.md 
+          if [ -f "README.en.md" ]; then
+            mv README.en.md README_en_EN.md
+          fi
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README_en_EN.md
+          git commit -m "Auto-translation of README to English" || echo "No changes"
+          git push
