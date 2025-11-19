@@ -403,7 +403,7 @@ http://IP_адрес_вашего_сервера:порт/WebBasePath(приме
   <img src="./media/Tutorial/Article_3/Login.png" alt="Login" width="70%">
 </div>
 
-
+</details> 
 
 
 <div align="center">
