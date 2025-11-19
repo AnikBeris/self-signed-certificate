@@ -2,7 +2,7 @@
 
 # Установка OpenSSL
 if ! command -v openssl &> /dev/null; then # <- проверка на наличие установленного пакета
-  sudo apt update && sudo apt install -y openssl # <- установка пакета
+  sudo apt update && sudo apt install -y openssl # <- обновление и установка пакета
   if [ $? -ne 0 ]; then # <- проверка на успешность установки
     exit 1
   fi
@@ -12,7 +12,7 @@ fi
 
 # Установка qrencode
 if ! command -v qrencode &> /dev/null; then # <- проверка на наличие установленного пакета
-  sudo apt update && sudo apt install -y qrencode # <- установка пакета
+  sudo apt update && sudo apt install -y qrencode # <- обновление и установка пакета
   if [ $? -ne 0 ]; then # <- проверка на успешность установки
     exit 1
   fi
@@ -28,7 +28,7 @@ wait_for_enter() {
 
 # Установка 3X-UI
 if ! command -v x-ui &> /dev/null; then # <- проверка на наличие установленного пакета
-  bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh) # <- установка пакета
+  bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh) # <- обновление и установка пакета
   if [ $? -ne 0 ]; then # <- проверка на успешность установки
     exit 1
   fi
@@ -67,7 +67,7 @@ for i in {1..4}; do echo "======================================================
 echo "############################################################"
 echo "#                      QR-КОД YOUTUBE                      #"
 echo "############################################################"
-YT_LINK="https://www.youtube.com/@DeveloperFirstWay"
+YT_LINK="https://www.youtube.com/@UnrealDevZon"
 qrencode -t ANSIUTF8 "$YT_LINK"
 wait_for_enter
 
