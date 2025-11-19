@@ -1,29 +1,33 @@
 name: Auto-Translate to English
 
 on:
-  workflow_dispatch: # ручной запуск
+  workflow_dispatch:
 
   push:
     paths:
-      - "README.md"   # Запускаем workflow только при изменении README.md
+      - "README.md"
 
 permissions:
-  contents: write      # Даём разрешение на запись в репозиторий
+  contents: write
 
 jobs:
   translate:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4   # Клонируем репозиторий
+      - uses: actions/checkout@v4
 
       - name: Читаем README.md
         id: read
         run: |
-          content=$(cat README.md)
+          content="$(cat README.md)"
           # Экранируем кавычки
           content="${content//\"/\\\"}"
-          echo "content=$content" >> $GITHUB_OUTPUT
+
+          # Передаем текст в output
+          echo "content<<EOF" >> $GITHUB_OUTPUT
+          echo "$content" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Переводим через GitHub Copilot API
         id: translate
@@ -31,7 +35,6 @@ jobs:
           COPILOT_TOKEN: ${{ secrets.COPILOT_TOKEN }}
           TEXT: ${{ steps.read.outputs.content }}
         run: |
-          # Отправляем запрос в GitHub Copilot API через curl
           response=$(curl -s -X POST "https://api.githubcopilot.com/copilot/v1/chat/completions" \
             -H "Authorization: Bearer ${COPILOT_TOKEN}" \
             -H "Content-Type: application/json" \
@@ -39,14 +42,12 @@ jobs:
               \"model\": \"gpt-4o-mini\",
               \"messages\": [
                 {\"role\": \"system\", \"content\": \"Ты — профессиональный переводчик Markdown.\"},
-                {\"role\": \"user\", \"content\": \"Переведи на английский, сохранив форматирование Markdown:\n${TEXT}\"}
+                {\"role\": \"user\", \"content\": \"Переведи на английский, сохранив Markdown:\n${TEXT}\"}
               ]
             }")
 
-          # Извлекаем текст перевода из JSON ответа
           translation=$(echo "$response" | jq -r '.choices[0].message.content')
 
-          # Передаём перевод в следующий шаг
           echo "translation<<EOF" >> $GITHUB_OUTPUT
           echo "$translation" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
