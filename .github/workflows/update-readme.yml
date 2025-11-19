@@ -5,13 +5,13 @@
 # 🔹 https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
 
 
-name: Build README from parts
+name: UPDATE-README from parts
 
 on:
   workflow_dispatch: # ручной запуск
 
-#  schedule:
-#    - cron: '10 9 * * *'  # каждый день в 12:00 UTC
+  schedule:
+    - cron: '10 9 * * *'  # каждый день в 12:00 UTC
     # Для запуска в 12:00 по Москве → заменить на "0 9 * * *"
 
 

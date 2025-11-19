@@ -1,6 +1,8 @@
-name: Auto Translate README to English
+name: Auto-Translate README to English
 
 on:
+  workflow_dispatch: # ручной запуск
+  
   push:
     paths:
       - "README.md"
