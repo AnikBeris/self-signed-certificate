@@ -1,18 +1,29 @@
-[English](/README.md) | [Русский](/README.ru_RU.md)
+<p align="center">
+  <strong>-------></strong> 
+  <a href="/README_en_EN.md">English</a> | 
+  <a href="/README.md">Русский</a> 
+  <strong><-------</strong>
+</p>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./media/3x-ui-dark.png">
-    <img alt="3x-ui" src="./media/3x-ui-light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png">
+    <img alt="Project Logo" src="./media/logo-light.png" width="512" height="auto">
   </picture>
 </p>
 
+---
+
 <div align="center">
 
-[![Static Badge](https://img.shields.io/badge/GitHub-blue?style=flat&logo=github)](https://github.com/AnikBeris/bitping)
-[![Static Badge](https://img.shields.io/badge/License-purple?style=flat&logo=github)](https://github.com/AnikBeris/bitping/blob/main/LICENSE)
-[![GitHub Repo stars](https://img.shields.io/github/stars/XternA/honeygain-reward?style=flat&logo=github&label=Stars&color=orange)](https://github.com/AnikBeris/bitping)
+[![GitHub](https://img.shields.io/badge/GitHub-blue?style=flat&logo=github)](https://github.com/AnikBeris)
+[![License](https://img.shields.io/badge/License-purple?style=flat&logo=github)](/LICENSE.md)
+[![GitHub Stars](https://img.shields.io/github/stars/AnikBeris?style=flat&logo=github&label=Звёзды&color=orange)](https://github.com/AnikBeris)
 
+</div>
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
 </div>
 
 
