@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VLESS → Clash Config Converter</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body>
+  <main class="container">
+    <header class="header">
+        <div class="logo">
+            <h1>VLESS → Clash Config</h1>
+        </div>
+        <p class="subtitle">Перевод VLESS-ссылок в конфиг для Clash (Meta) | Clash Verge</p>
+        <p class="subtitle">Разработчик <strong>Anik Beris</strong></p>
+    </header>
+
+    <section class="input-section">
+      <label for="vlessInput">VLESS ссылка</label>
+      <textarea id="vlessInput" placeholder="vless://uuid@server:port?encryption=none&security=tls&type=tcp&sni=example.com#Name"></textarea>
+
+      <div class="options">
+        <div class="option-group">
+          <label for="countrySelect">Флаг страны</label>
+          <select id="countrySelect">
+            <option value="" selected>Без Флага</option>
+            <option value="🇺🇸">🇺🇸 США</option>
+            <option value="🇬🇪">🇬🇪 Грузия</option>
+            <option value="🇫🇷">🇫🇷 Франция</option>
+            <option value="🇫🇮">🇫🇮 Финляндия</option>
+            <option value="🇦🇲">🇦🇲 Армения</option>
+            <option value="🇪🇪">🇪🇪 Эстония</option>
+            <option value="🇮🇳">🇮🇳 Индия</option>
+          </select>
+        </div>
+
+        <div class="option-group">
+          <label for="customName">Имя</label>
+          <input type="text" id="customName" placeholder="Server vless">
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button onclick="convert()">Только прокси</button>
+        <button onclick="generateFullConfig()">Полный конфиг</button>
+      </div>
+    </section>
+
+
+    <section class="output-section">
+      <div class="output-header">
+        <h2>Результат</h2>
+        <div class="output-buttons">
+          <button onclick="copyResult()" class="copy-btn">Копировать</button>
+          <button onclick="downloadFile('yml')" id="download-yml" class="download-btn" disabled>Скачать .yml</button>
+          <button onclick="downloadFile('conf')" id="download-conf" class="download-btn" disabled>Скачать .conf</button>
+        </div>
+      </div>
+      <pre id="output"></pre>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
