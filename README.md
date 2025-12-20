@@ -428,6 +428,88 @@ SSL-сертификат Cloudflare
   <a href="#-содержание">⬆️ Наверх</a> 
 </h2>
 
+<h1 align="center"> 
+Конвертер ссылок Vless в готовый конфиг фаил
+</h1>
+
+<div align="center">
+  <img style="width: 90%; height: auto;" src="./media/Tutorial/Article_2/Icon-vless-config-converter.png" alt="Icon-vless-config-converter">
+</div>
+
+<h1 align="center"> 
+  <a href="https://anikberis.github.io/vless-config-converter/"target="vless-config-converter"> vless config converter </a> - это конвертер ссылок Vless в готовый конфиг фаил <code>.yml</code> <code>.conf</code>
+</h1>
+
+<details> 
+    <summary> ⚙️ Развернуть описание </summary>
+
+<h2 align="center"> Откройте сайт
+  <a href="https://anikberis.github.io/vless-config-converter/"target="vless-config-converter"> vless-config-converter </a>
+</h2>
+
+<h2>Вкладка <code>Settings</code></h2>
+
+<ol style="font-size: 18px;">
+  <li>
+    В поле <code>VLESS Link</code> вставьте вашу VLESS-ссылку.
+    <br>
+    <strong>Пример:</strong>
+    <code>vless://UUID@vpn.example.com:443?type=tcp&security=reality&pbk=...&fp=chrome&sni=www.cloudflare.com#My_VLESS_Node</code>
+  </li>
+
+  <li>
+    В поле <code>Country Flag</code> выберите флаг страны, в которой расположен сервер
+  </li>
+
+  <li>
+    В поле <code>Proxy Name</code> укажите имя прокси, которое будет использоваться в конфигурационном файле
+  </li>
+
+  <li>
+    В разделе <code>Config Type</code> выберите <code>Full Config</code>
+  </li>
+
+  <li>
+    Нажмите кнопку <code>Convert</code> для генерации конфигурации
+  </li>
+</ol>
+
+<div align="center">
+  <img style="width: 90%; height: auto;" src="./media/Tutorial/Article_2/UrlVlessInfo.png" alt="UrlVlessInfo">
+</div>
+
+---
+
+<h1 align="center">Скачивание конфигурационного файла</h1>
+<h2>Вкладка <code>Result</code></h2>
+<ol style="font-size: 18px;">
+  <li>
+    кнопка <code>Copy</code> - скопировать конфигурацию в буфер обмена
+  </li>
+  <li>
+    кнопка <code>.yml</code> - скачать конфигурацию в формате <code>.yml</code>
+  </li>
+  <li>
+    кнопка <code>.conf</code> - скачать конфигурацию в формате <code>.conf</code>
+  </li>
+</ol>
+
+<div align="center">
+  <img style="width: 90%; height: auto;" src="./media/Tutorial/Article_2/ConvertInfo.png" alt="ConvertInfo">
+</div>
+
+</details> 
+
+
+<div align="center">
+  <img src="./media/image0.gif" alt="SPACER" width="90%">
+</div>
+
+
+<h2 align="center">
+  <a href="#-содержание">⬆️ Наверх</a> 
+</h2>
+
 
 <h1 align="center"> 
 Установка 3X-UI
@@ -539,13 +621,13 @@ http://IP_адрес_вашего_сервера:порт/WebBasePath(приме
 Отрываем понель выбора версий и обновлений
 
 <div align="center">
-  <img src="./media/Tutorial/Article_3/UISetting.png" alt="UISetting" width="70%">
+  <img src="./media/Tutorial/Article_4/UISetting.png" alt="UISetting" width="70%">
 </div>
 
 Обновляем дата файлы `GeoSite` и `GeoIP`
 
 <div align="center">
-  <img src="./media/Tutorial/Article_3/UpdateGeo_Site_IP.png" alt="Update GeoSite GeoIP" width="70%">
+  <img src="./media/Tutorial/Article_4/UpdateGeo_Site_IP.png" alt="Update GeoSite GeoIP" width="70%">
 </div>
 
 </details> 
@@ -559,7 +641,7 @@ http://IP_адрес_вашего_сервера:порт/WebBasePath(приме
 переходим в `настройки` и включаем подписка
 
 <div align="center">
-  <img src="./media/Tutorial/Article_3/Setting.png" alt="Setting" width="70%">
+  <img src="./media/Tutorial/Article_4/Setting.png" alt="Setting" width="70%">
 </div>
 
 Когда закончили нажимаем `сохранить` и `перезапуск панели`
@@ -573,7 +655,7 @@ http://IP_адрес_вашего_сервера:порт/WebBasePath(приме
 Выставляем всё, как на картинке
 
 <div align="center">
-  <img src="./media/Tutorial/Article_3/Setting_Xray_DNS.png" alt="Setting Xray DNS" width="70%">
+  <img src="./media/Tutorial/Article_4/Setting_Xray_DNS.png" alt="Setting Xray DNS" width="70%">
 </div>
 
 Когда закончили нажимаем `сохранить` и `перезапуск Xray`
@@ -593,7 +675,7 @@ http://IP_адрес_вашего_сервера:порт/WebBasePath(приме
 переходим `настройки X-Ray` -> выбираем `DNS` -> открываем подпуснкт `DNS`
 
 <div align="center">
-  <img src="./media/Tutorial/Article_3/Setting_Xray_DNS.png" alt="Setting Xray DNS" width="70%">
+  <img src="./media/Tutorial/Article_4/Setting_Xray_DNS.png" alt="Setting Xray DNS" width="70%">
 </div>
 
 Нажимаем `Создать DNS` и по очереди записываем `DNS адреса`
@@ -611,7 +693,7 @@ tcp://9.9.9.9
 ```
 
 <div align="center">
-  <img src="./media/Tutorial/Article_3/DNS.png" alt="DNS" width="70%">
+  <img src="./media/Tutorial/Article_4/DNS.png" alt="DNS" width="70%">
 </div>
 
 Когда закончили нажимаем `сохранить` и `перезапуск Xray`
@@ -637,7 +719,7 @@ tcp://9.9.9.9
 Переходим в боковом меню `"Подключения"` -> Нажимаем кнопку `"Добавить подключение"`
 
 <div align="center">
-  <img src="./media/Tutorial/Article_4/UI.png" alt="UI" width="70%">
+  <img src="./media/Tutorial/Article_5/UI.png" alt="UI" width="70%">
 </div>
 
 
