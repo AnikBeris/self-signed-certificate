@@ -1,4 +1,4 @@
-name: Translate Lessons
+name: Auto-Translate-folder-docs
 
 on:
   workflow_dispatch: # ручной запуск
